@@ -15,7 +15,7 @@ from config import system_configs
 from utils import crop_image, normalize_
 from external.nms import soft_nms, soft_nms_merge
 
-colours = np.random.rand(80,3)
+colours = np.random.rand(6,3)
 
 def _rescale_dets(detections, ratios, borders, sizes):
     xs, ys = detections[..., 0:4:2], detections[..., 1:4:2]
@@ -144,8 +144,8 @@ def kp_detection(db, nnet, result_dir, debug=False, decode_func=kp_decode):
             dets[:, :, 0:4] /= scale
             center[:, :, 0:2] /= scale
 
-            if scale == 1:
-              center_points.append(center)
+            # if scale == 1:
+            center_points.append(center)
             detections.append(dets)
 
         detections = np.concatenate(detections, axis=1)

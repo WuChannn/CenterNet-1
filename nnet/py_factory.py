@@ -133,7 +133,7 @@ class NetworkFactory(object):
 
     def save_params(self, iteration):
         cache_file = system_configs.snapshot_file.format(iteration)
-        print("saving model to {}".format(cache_file))
+        print("saving model to {}\n".format(cache_file))
         with open(cache_file, "wb") as f:
             params = self.model.state_dict()
             torch.save(params, f) 

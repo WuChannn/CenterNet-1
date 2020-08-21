@@ -139,12 +139,15 @@ def train(training_dbs, validation_db, start_iter=0):
             #training_loss, focal_loss, pull_loss, push_loss, regr_loss, cls_loss = nnet.train(**training)
 
             if display and iteration % display == 0:
-                print("training loss at iteration {}: {}".format(iteration, training_loss.item()))
-                print("focal loss at iteration {}:    {}".format(iteration, focal_loss.item()))
-                print("pull loss at iteration {}:     {}".format(iteration, pull_loss.item())) 
-                print("push loss at iteration {}:     {}".format(iteration, push_loss.item()))
-                print("regr loss at iteration {}:     {}".format(iteration, regr_loss.item()))
-                #print("cls loss at iteration {}:      {}\n".format(iteration, cls_loss.item()))
+                # print("training loss at iteration {}: {}".format(iteration, training_loss.item()))
+                # print("focal loss at iteration {}:    {}".format(iteration, focal_loss.item()))
+                # print("pull loss at iteration {}:     {}".format(iteration, pull_loss.item())) 
+                # print("push loss at iteration {}:     {}".format(iteration, push_loss.item()))
+                # print("regr loss at iteration {}:     {}".format(iteration, regr_loss.item()))
+                # print("cls loss at iteration {}:      {}\n".format(iteration, cls_loss.item()))
+                out_str = str(iteration) + ' loss' + ' | train: {:.3f}'.format(training_loss.item()) + ' | focal: {:.3f}'.format(focal_loss.item()) \
+                    + ' | pull: {:.3f}'.format(pull_loss.item()) + ' | push: {:.3f}'.format(push_loss.item()) + ' | regr: {:.3f}'.format(regr_loss.item())
+                print(out_str)
 
             del training_loss, focal_loss, pull_loss, push_loss, regr_loss#, cls_loss
 
@@ -152,7 +155,10 @@ def train(training_dbs, validation_db, start_iter=0):
                 nnet.eval_mode()
                 validation = pinned_validation_queue.get(block=True)
                 validation_loss = nnet.validate(**validation)
-                print("validation loss at iteration {}: {}".format(iteration, validation_loss.item()))
+                # print("validation loss at iteration {}: {}".format(iteration, validation_loss.item()))
+                print('------------------------------')
+                out_str = str(iteration) + ' loss' + ' | validation: {:.3f}'.format(validation_loss.item())
+                print(out_str)
                 nnet.train_mode()
 
             if iteration % snapshot == 0:

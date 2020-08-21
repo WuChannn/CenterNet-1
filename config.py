@@ -8,8 +8,8 @@ class Config:
         self._configs["sampling_function"] = "kp_detection"
 
         # Training Config
-        self._configs["display"]           = 5
-        self._configs["snapshot"]          = 5000
+        self._configs["display"]           = 50
+        self._configs["snapshot"]          = 500
         self._configs["stepsize"]          = 450000
         self._configs["learning_rate"]     = 0.00025
         self._configs["decay_rate"]        = 10
@@ -21,7 +21,7 @@ class Config:
         self._configs["weight_decay"]      = False
         self._configs["weight_decay_rate"] = 1e-5
         self._configs["weight_decay_type"] = "l2"
-        self._configs["pretrain"]          = None
+        self._configs["pretrain"]          = './cache/nnet/CenterNet-52/CenterNet-52_37500.pkl'
         self._configs["opt_algo"]          = "adam"
         self._configs["chunk_sizes"]       = None
 

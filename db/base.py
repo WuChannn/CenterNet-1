@@ -82,7 +82,8 @@ class BASE(object):
             raise ValueError("Image path is not initialized")
 
         image_id = self._image_ids[ind]
-        return self._image_file.format(image_id)
+        # return self._image_file.format(image_id)
+        return image_id
 
     def write_result(self, ind, all_bboxes, all_scores):
         pass

@@ -32,8 +32,16 @@ class MSCOCO(DETECTION):
         self._label_file = os.path.join(self._label_dir, "instances_{}.json")
         self._label_file = self._label_file.format(self._dataset)
 
-        self._image_dir  = os.path.join(self._coco_dir, "images", self._dataset)
-        self._image_file = os.path.join(self._image_dir, "{}")
+        # self._image_dir  = os.path.join(self._coco_dir, "images", self._dataset)
+        # self._image_file = os.path.join(self._image_dir, "{}")
+
+        self._text_file = os.path.join(self._coco_dir, "ks_{}.txt")
+        self._text_file = self._label_file.format(self._dataset)
+        with open(self._text_file, 'r') as f:
+            txt = f.readlines()
+            annotations = [line.strip() for line in txt if len(line.strip().split()[1:]) != 0]
+            img_files = [i.split()[0] for i in annotations]
+        self._image_file = img_files
 
         self._data = "coco"
         self._mean = np.array([0.40789654, 0.44719302, 0.47026115], dtype=np.float32)
